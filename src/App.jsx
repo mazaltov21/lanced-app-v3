@@ -413,23 +413,25 @@ function CC_Overview({ onSelect }) {
           <div key={s.id}
             onClick={() => onSelect(s)}
             className="bg-white border border-gray-200 rounded-xl overflow-hidden cursor-pointer hover:border-purple-300 hover:shadow-sm transition-all">
-            <Img src={s.img} className="w-full h-28" />
-            <div className="p-3.5">
-              <div className="flex items-start justify-between gap-3 mb-2">
-                <div className="min-w-0">
-                  <p className="font-semibold text-sm text-gray-900 leading-snug">{s.title}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{s.question}</p>
+            <div className="flex">
+              <Img src={s.img} className="w-24 flex-shrink-0 self-stretch min-h-[90px]" />
+              <div className="flex-1 min-w-0 px-4 py-3 flex flex-col justify-between">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="font-semibold text-sm text-gray-900 leading-snug">{s.title}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">{s.question}</p>
+                  </div>
+                  <span className="text-sm font-bold text-gray-800 flex-shrink-0">€_</span>
                 </div>
-                <span className="text-sm font-bold text-gray-800 flex-shrink-0">€_</span>
-              </div>
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs text-gray-400">📅 {s.date}</span>
-                <span className="text-xs text-gray-300">·</span>
-                <span className="text-xs font-medium text-gray-700">{s.expert.name}</span>
-                <span className="text-xs text-gray-300">·</span>
-                <Badge color={s.spotsLeft <= 2 ? "orange" : "gray"}>
-                  {s.spotsLeft} spot{s.spotsLeft !== 1 ? "s" : ""} left
-                </Badge>
+                <div className="flex flex-wrap items-center gap-2 mt-2.5">
+                  <span className="text-xs text-gray-400">📅 {s.date}</span>
+                  <span className="text-xs text-gray-300">·</span>
+                  <span className="text-xs font-medium text-gray-700">{s.expert.name}</span>
+                  <span className="text-xs text-gray-300">·</span>
+                  <Badge color={s.spotsLeft <= 2 ? "orange" : "gray"}>
+                    {s.spotsLeft} spot{s.spotsLeft !== 1 ? "s" : ""} left
+                  </Badge>
+                </div>
               </div>
             </div>
           </div>
@@ -445,26 +447,22 @@ function CC_Detail({ session: s, onJoin, back }) {
 
   return (
     <div className="max-w-xl">
-      {/* Hero image */}
-      <div className="relative">
-        <Img src={s.img} className="w-full h-44" />
-        <button onClick={back}
-          className="absolute top-3 left-3 bg-white/90 text-gray-700 text-xs px-2.5 py-1 rounded-full font-medium hover:bg-white transition-colors">
-          ← Back
-        </button>
-      </div>
-
-      <div className="p-5">
+      {/* Gradient header */}
+      <div className="px-5 pt-5 pb-4 bg-gradient-to-br from-purple-50 to-white border-b border-purple-100">
+        <Back onClick={back} label="All sessions" />
         <h2 className="text-xl font-bold text-gray-900 mb-0.5">{s.title}</h2>
         <p className="text-sm text-gray-500 mb-3">{s.question}</p>
-
-        <div className="flex flex-wrap items-center gap-2 mb-5">
+        <div className="flex flex-wrap items-center gap-2">
           <Badge color="gray">📅 {s.date}</Badge>
           <Badge color="gray">⏱ {s.duration}</Badge>
           <Badge color={s.spotsLeft <= 2 ? "orange" : "gray"}>
             {s.spotsLeft} spots left
           </Badge>
         </div>
+      </div>
+
+      <div className="p-5">
+
 
         {/* Tab selector */}
         <div className="flex gap-1 p-1 rounded-xl bg-gray-100 mb-5">
